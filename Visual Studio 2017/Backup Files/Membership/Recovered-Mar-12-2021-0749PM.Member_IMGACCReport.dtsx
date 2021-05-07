@@ -1,0 +1,2242 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/13/2019 7:55:06 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LHTU05CG7381224"
+  DTS:CreatorName="MS\jsharm38"
+  DTS:DTSID="{163C9B37-E37F-431C-8D25-4CF1F694CEA3}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Member_IMGACCReport"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="300"
+  DTS:VersionGUID="{28BE68D7-DEEF-4EED-8CDE-4DFEB94DA24A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[apsrp05021.uhc.com.polaris1]"
+      DTS:CreationName="ODBC"
+      DTS:DTSID="{96A9C896-8130-4FED-A592-94DC1847C47C}"
+      DTS:ObjectName="apsrp05021.uhc.com.polaris1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="uid=polaprof;Dsn=apsrp05021.uhc.com;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DBSED4019.RNA_Tenant]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D98FC179-3D80-4198-A17D-82393FEEDC17}"
+      DTS:ObjectName="DBSED4019.RNA_Tenant">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Package::PDataBaseName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Package::PServerName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DBSED4019;Initial Catalog=RNA_Tenant;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{DC8AD06C-EF5B-4DA5-AF52-2A9ABE1FF00D}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::PDestinationFolder]+"\\"+ @[User::CompleteFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="E:\MembershipFullfillment\Member_IMGACCREPORT\DestinationFolder\\update_cirrus_claims.20210305.dat">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:DataType="302"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DCN"
+              DTS:DTSID="{22BF5B1A-9A1E-41F6-A39F-953132D73957}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="8"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Medical_Hospital"
+              DTS:DTSID="{87C2F1FF-3728-423E-97FD-FB6B9530590B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Paper_Manual"
+              DTS:DTSID="{F845DE1C-530A-404C-AAA1-5EB2764BCE8D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ICN"
+              DTS:DTSID="{B288357E-DD93-47A0-A854-EC07E324B94F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="302"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Cirrus_Load_Date"
+              DTS:DTSID="{1D055F90-F865-442E-BD17-A1BB62E9B82A}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMTP Connection Manager]"
+      DTS:CreationName="SMTP"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{B17596EC-73ED-42B5-94B9-3B46CADB3564}"
+      DTS:ObjectName="SMTP Connection Manager">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=mailo2.uhc.com;UseWindowsAuthentication=True;EnableSsl=False;Timeout=100000;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{D458D2EE-AEAB-46BA-9241-6F2BDDA3F2A6}"
+      DTS:ObjectName="EmailFrom">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">jainendra_k_sharma@optum.com</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{6CC762D2-E30F-465C-ABD5-6EB2E95888B0}"
+      DTS:ObjectName="EmailTo">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">jainendra_k_sharma@optum.com</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{F87BD51C-4334-4CEF-810B-1B096F36354A}"
+      DTS:ObjectName="PDataBaseName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">RNA_Tenant</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{BC3379B3-590A-402D-B7C6-337EBC80384B}"
+      DTS:ObjectName="PDestFileName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">update_cirrus_claims.</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{47285465-4FCE-4C04-B1D5-F02D36129A82}"
+      DTS:ObjectName="PDestinationFolder">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">E:\MembershipFullfillment\Member_IMGACCREPORT\DestinationFolder\</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{C1D3C01D-C04C-487B-8FBA-232651D3F6DF}"
+      DTS:ObjectName="PErrorLogAbolutePath">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">E:\MembershipFullfillment\Member_IMGACCREPORT\ErrorLog\</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{C236E0DC-E14A-4AED-99D4-CE5C744D8671}"
+      DTS:ObjectName="PFileDelimiter">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">|</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{505FDA62-1CE5-435E-8ADE-0FAD486634FA}"
+      DTS:ObjectName="PServerName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">DBSED4019</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{5CD64F31-7932-4017-B9B6-F9D73F1C3D0B}"
+      DTS:ObjectName="PVarExt">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">.dat</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4C4FFC54-C9A2-4144-9EC0-93ABCF8FA2C1}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::PDestFileName] + @[User::VarDt]+ @[$Package::PVarExt]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CompleteFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">update_cirrus_claims.20210305.dat</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ED0F9AAB-E220-4BDE-AE16-0FEF43D900F3}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="Replace(Substring((DT_WSTR, 50) GETDATE(),1,10),&quot;-&quot;,&quot;&quot;)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="VarDt">
+      <DTS:VariableValue
+        DTS:DataType="8">20210305</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">1,7,OnError</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPostExecute"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPostValidate"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPreExecute"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPreValidate"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnProgress"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnTaskFailed"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Send Mail Task"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{655728DD-2FE4-40EC-8240-EBC00ABD1874}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Mail Task"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:PropertyExpression
+        DTS:Name="FromLine">@[$Package::EmailFrom]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="MessageSource">"Hi Team
+The Package "+ @[System::PackageName] +" has been executed successfully on "+ @[System::MachineName] +" @ "+ SUBSTRING((DT_WSTR, 50) GETDATE() , 1, 19 ) +" Time.
+
+Thanks &amp; Regards
+Polaris Team"</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Subject">"Package Execution Status"</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ToLine">@[$Package::EmailTo]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{B17596EC-73ED-42B5-94B9-3B46CADB3564}"
+          SendMailTask:From="jainendra_k_sharma@optum.com"
+          SendMailTask:To="jainendra_k_sharma@optum.com"
+          SendMailTask:Subject="Package Execution Status"
+          SendMailTask:MessageSource="Hi Team&#xA;The Package Member_IMGACCReport has been executed successfully on LHTU05CG034990J @ 2021-03-05 17:51:06 Time.&#xA;&#xA;Thanks &amp; Regards&#xA;Polaris Team" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{FF60EBC8-1D63-41CF-8130-345B0113967B}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{7BD3DF13-2FE1-4EE4-B99C-9F404383ACB0}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Data Flow Task\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[cirrusloaddate]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="cirrusloaddate"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[cirrusloaddate]"
+                          truncationRowDisposition="FailComponent"
+                          usageType="readWrite">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">[REPLACE]([SUBSTRING]((DT_STR,50,1252)#{Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[cirrusloaddate]},6,5),"-",".") + "." + [SUBSTRING]((DT_STR,50,1252)#{Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[cirrusloaddate]},3,2) + [REPLACE]([REPLACE]([SUBSTRING]((DT_STR,50,1252)#{Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[cirrusloaddate]},11,9)," ","."),":",".")</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">REPLACE(SUBSTRING((DT_STR,50,1252)cirrusloaddate,6,5),"-",".") + "." + SUBSTRING((DT_STR,50,1252)cirrusloaddate,3,2) + REPLACE(REPLACE(SUBSTRING((DT_STR,50,1252)cirrusloaddate,11,9)," ","."),":",".")</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Data Flow Task\ODBC Source"
+                  componentClassID="Attunity.SSISODBCSrc"
+                  description="ODBC Source"
+                  name="ODBC Source"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand">SELECT	tch.cedcnid AS DCN,
+   tch.clearinghouseclaimid  AS ICN ,  (
+		CASE   
+			WHEN tch.claimtype = '3' THEN "Medical" 
+			WHEN tch.claimtype = '2' THEN "Hospital"  
+		END) AS  MedicalHospital,
+		(CASE 
+			WHEN tch.claimsubmissiontype = '01' THEN "Paper" 
+			WHEN  tch.claimsubmissiontype = '03'  THEN "Manual" 
+		END) AS PaperManual,
+		tce.cirrusreceiptdate as CirrusLoadDate   
+FROM	uhc_pfv_prd.claimheader_std AS tch 
+INNER JOIN uhc_pfv_prd.claimevent_std AS tce 
+	ON  tch.chclaimid = tce.claimid 
+WHERE	
+tce.cirrusreceiptdate &gt;=  date_sub(FROM_UNIXTIME(UNIX_TIMESTAMP(),'yyyy-MM-dd'), 7) and tch.cedcnid &lt;&gt; ''
+--CAST(tce.cirrusreceiptdate AS DATE) &gt;= Cast(date_sub(cast(current_timestamp as date), 7)  as Date) 
+GROUP BY tch.cedcnid,
+		tch.clearinghouseclaimid,
+		CASE 
+			WHEN tch.claimtype = '3' THEN "Medical"  
+			WHEN tch.claimtype = '2' THEN "Hospital"  
+		END, 
+		CASE 
+			WHEN tch.claimsubmissiontype = '01' THEN "Paper"  
+			WHEN tch.claimsubmissiontype = '03' THEN "Manual" 
+		END, tce.cirrusreceiptdate,
+		tch.claimtypedesc,
+		 tch.claimsubmissiontypedesc,
+		tch.claimenvelopetype 
+HAVING	(((
+		CASE 
+			WHEN tch.claimtype = '3' THEN "Medical"  
+			WHEN tch.claimtype = '2' THEN "Hospital"  
+		END)= "Medical" 
+	Or(
+		CASE 
+			WHEN tch.claimtype = '3' THEN "Medical"  
+			WHEN tch.claimtype = '2' THEN "Hospital"  
+		END) = "Hospital") 
+	AND ((
+		CASE 
+			WHEN tch.claimsubmissiontype = '01'  THEN "Paper" 
+			WHEN  tch.claimsubmissiontype = '03' THEN "Manual" 
+		END) = "Paper" 
+	Or  (
+		CASE 
+			WHEN tch.claimsubmissiontype = '01' THEN "Paper"  
+			WHEN  tch.claimsubmissiontype = '03' THEN "Manual" 
+		END)  = "Manual") 
+	AND((tch.claimenvelopetype) &lt;&gt; "4")) 
+
+Union All
+SELECT	tch.submittertracenum AS DCN,
+   tch.clearinghouseclaimid  AS ICN ,  (
+		CASE   
+			WHEN tch.claimtype = '3' THEN "Medical" 
+			WHEN tch.claimtype = '2' THEN "Hospital"  
+		END) AS  MedicalHospital,
+		(CASE 
+			WHEN tch.claimsubmissiontype = '01' THEN "Paper" 
+			WHEN  tch.claimsubmissiontype = '03'  THEN "Manual" 
+		END) AS PaperManual,
+		tce.cirrusreceiptdate as CirrusLoadDate   
+FROM	uhc_pfv_prd.claimheader_std AS tch 
+INNER JOIN uhc_pfv_prd.claimevent_std AS tce 
+	ON  tch.chclaimid = tce.claimid 
+WHERE	
+tce.cirrusreceiptdate &gt;=  date_sub(FROM_UNIXTIME(UNIX_TIMESTAMP(),'yyyy-MM-dd'), 7) and tch.submittertracenum &lt;&gt; ''
+--CAST(tce.cirrusreceiptdate AS DATE) &gt;= Cast(date_sub(cast(current_timestamp as date), 7)  as Date) 
+GROUP BY tch.submittertracenum,
+		tch.clearinghouseclaimid,
+		CASE 
+			WHEN tch.claimtype = '3' THEN "Medical"  
+			WHEN tch.claimtype = '2' THEN "Hospital"  
+		END, 
+		CASE 
+			WHEN tch.claimsubmissiontype = '01' THEN "Paper"  
+			WHEN tch.claimsubmissiontype = '03' THEN "Manual" 
+		END, tce.cirrusreceiptdate,
+		tch.claimtypedesc,
+		 tch.claimsubmissiontypedesc,
+		tch.claimenvelopetype 
+HAVING	(((
+		CASE 
+			WHEN tch.claimtype = '3' THEN "Medical"  
+			WHEN tch.claimtype = '2' THEN "Hospital"  
+		END)= "Medical" 
+	Or(
+		CASE 
+			WHEN tch.claimtype = '3' THEN "Medical"  
+			WHEN tch.claimtype = '2' THEN "Hospital"  
+		END) = "Hospital") 
+	AND ((
+		CASE 
+			WHEN tch.claimsubmissiontype = '01'  THEN "Paper" 
+			WHEN  tch.claimsubmissiontype = '03' THEN "Manual" 
+		END) = "Paper" 
+	Or  (
+		CASE 
+			WHEN tch.claimsubmissiontype = '01' THEN "Paper"  
+			WHEN  tch.claimsubmissiontype = '03' THEN "Manual" 
+		END)  = "Manual") 
+	AND((tch.claimenvelopetype) &lt;&gt; "4"))
+	ORDER BY 5</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the number of rows fetched per batch."
+                      expressionType="Notify"
+                      name="BatchSize">1000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                      expressionType="Notify"
+                      name="ExposeCharColumnsAsUnicode">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                      expressionType="Notify"
+                      name="StatementTimeout">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The method used for fetching data."
+                      expressionType="Notify"
+                      name="FetchMethod"
+                      typeConverter="FetchMethod">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The ODBC C data type for binding numeric data."
+                      expressionType="Notify"
+                      name="BindNumericAs"
+                      typeConverter="BindNumericAs">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                      expressionType="Notify"
+                      name="BindCharColumnsAs"
+                      typeConverter="BindCharColumnsAs">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Data Flow Task\ODBC Source.Connections[ODBCConnection]"
+                      connectionManagerID="Package.ConnectionManagers[apsrp05021.uhc.com.polaris1]"
+                      connectionManagerRefId="Package.ConnectionManagers[apsrp05021.uhc.com.polaris1]"
+                      description="The ODBC runtime connection"
+                      name="ODBCConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output]"
+                      errorRowDisposition="FailComponent"
+                      name="ODBC Source Output"
+                      truncationRowDisposition="FailComponent">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[dcn]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.dcn]"
+                          length="500"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[dcn]"
+                          name="dcn" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[icn]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.icn]"
+                          length="500"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[icn]"
+                          name="icn" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[medicalhospital]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.medicalhospital]"
+                          length="500"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[medicalhospital]"
+                          name="medicalhospital" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[papermanual]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.papermanual]"
+                          length="500"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[papermanual]"
+                          name="papermanual" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[cirrusloaddate]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.cirrusloaddate]"
+                          length="500"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[cirrusloaddate]"
+                          name="cirrusloaddate" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.dcn]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="_u2.dcn" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.icn]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="_u2.icn" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.medicalhospital]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="_u2.medicalhospital" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.papermanual]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="_u2.papermanual" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.cirrusloaddate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="_u2.cirrusloaddate" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output]"
+                      isErrorOut="true"
+                      name="ODBC Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[_u2.dcn]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.dcn]"
+                          length="500"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[_u2.dcn]"
+                          name="_u2.dcn" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[_u2.icn]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.icn]"
+                          length="500"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[_u2.icn]"
+                          name="_u2.icn" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[_u2.medicalhospital]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.medicalhospital]"
+                          length="500"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[_u2.medicalhospital]"
+                          name="_u2.medicalhospital" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[_u2.papermanual]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.papermanual]"
+                          length="500"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[_u2.papermanual]"
+                          name="_u2.papermanual" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[_u2.cirrusloaddate]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[_u2.cirrusloaddate]"
+                          length="500"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[_u2.cirrusloaddate]"
+                          name="_u2.cirrusloaddate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Data Flow Task\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[OLEDB Dest_SQL]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DBSED4019.RNA_Tenant]"
+                      connectionManagerRefId="Package.ConnectionManagers[DBSED4019.RNA_Tenant]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[dcn]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="dcn"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DCN]"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[dcn]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[icn]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="icn"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ICN]"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[icn]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[medicalhospital]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="medicalhospital"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Medical/Hospital]"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[medicalhospital]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[papermanual]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="papermanual"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Paper/Manual]"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[papermanual]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cirrusloaddate]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="cirrusloaddate"
+                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Cirrus Load Date]"
+                          lineageId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output].Columns[cirrusloaddate]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DCN]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="DCN" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ICN]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="ICN" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Medical/Hospital]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="Medical/Hospital" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Paper/Manual]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="Paper/Manual" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Cirrus Load Date]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="Cirrus Load Date" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                          dataType="i4"
+                          name="id" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Data Flow Task.Paths[Derived Column Output]"
+                  endId="Package\Sequence Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\Data Flow Task.Paths[ODBC Source Output]"
+                  endId="Package\Sequence Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  name="ODBC Source Output"
+                  startId="Package\Sequence Container\Data Flow Task\ODBC Source.Outputs[ODBC Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\ESQL_InsertLastRecord"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{535D6B1A-D1F3-4B8C-8C91-6118016BF566}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ESQL_InsertLastRecord"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:PropertyExpression
+            DTS:Name="Connection">@[$Package::PServerName]+"."+ @[$Package::PDataBaseName]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D98FC179-3D80-4198-A17D-82393FEEDC17}"
+              SQLTask:SqlStatementSource="Exec Proc_ManualRcd" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\ESQL_TableCreateFirstRecordInsert"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{7A844A13-A0D9-4E4D-8A14-28B15C7B162A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ESQL_TableCreateFirstRecordInsert"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:PropertyExpression
+            DTS:Name="Connection">@[$Package::PServerName]+"."+ @[$Package::PDataBaseName]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D98FC179-3D80-4198-A17D-82393FEEDC17}"
+              SQLTask:SqlStatementSource="If OBJECT_ID('[OLEDB Dest_SQL]')is not NULL Drop Table [OLEDB Dest_SQL]&#xA;&#xA; CREATE TABLE [OLEDB Dest_SQL] (&#xA;  [DCN] varchar(255),&#xA;      [ICN] varchar(255),&#xA;     [Medical/Hospital] varchar(255),&#xA;      [Paper/Manual] varchar(255),&#xA;      [Cirrus Load Date] varchar(255)&#xA;   )&#xA;CREATE CLUSTERED INDEX IX_TestTable ON [OLEDB Dest_SQL] ([Cirrus Load Date] ASC)&#xA; ALTER TABLE [OLEDB Dest_SQL] ADD id INT IDENTITY(1, 1)&#xA;go&#xA;If OBJECT_ID('[Proc_ManualRcd]')is not NULL DROP PROCEDURE [dbo].[Proc_ManualRcd]&#xA;go&#xA;CREATE procedure [dbo].[Proc_ManualRcd] &#xA; as &#xA;  Begin&#xA;&#xA;  Set Transaction Isolation Level read uncommitted&#xA;  SET IDENTITY_INSERT [OLEDB Dest_SQL] On&#xA;  Declare @FromDate varchar(255), @ToDate varchar(255), @TotalRecordCnt varchar(20),@lastId int, @CtrlNum varchar(255)&#xA;  Select @TotalRecordCnt=Count(1) from [OLEDB Dest_SQL]&#xA;  Select @FromDate = Min([Cirrus Load Date]) from [OLEDB Dest_SQL] where ISNULL([Cirrus Load Date],'' ) &lt;&gt; ''&#xA;  Select @ToDate= Max([Cirrus Load Date]) from [OLEDB Dest_SQL] where ISNULL([Cirrus Load Date],'' ) &lt;&gt; ''&#xA;  Select @lastId=Cast(@TotalRecordCnt as int)+1 &#xA;  Select @CtrlNum=Replace(Convert(Varchar(255),getdate(),10),'-','.')+'.'+Replace(Convert(Varchar(255),current_timestamp,108),':','.')&#xA;&#xA; Insert into [OLEDB Dest_SQL](DCN,ICN,[Medical/Hospital],[Paper/Manual], [Cirrus Load Date],id) values('Oxford Paper and Manual Claims Successfully Loaded on Cirrus From '+&#xA; @FromDate +' To ' +@ToDate ,&#xA; 'Control Number: '+@CtrlNum,&#xA; '', '', '', 0)&#xA; Insert into [OLEDB Dest_SQL](DCN,ICN,[Medical/Hospital],[Paper/Manual], [Cirrus Load Date], id) values('Total Record Count: '+@TotalRecordCnt,&#xA; 'Control Number: '+@CtrlNum,&#xA; '', '', '', @lastId)&#xA;&#xA;  End&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Scrpt_SQL_To_CSV1"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Script Task"
+          DTS:DTSID="{FBF97310-47DC-4D50-8EBA-57FAC3B82E1D}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Scrpt_SQL_To_CSV1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_af5dca217bb04993bfbce1f4ca1540a9"
+              VSTAMajorVersion="14"
+              VSTAMinorVersion="0"
+              Language="CSharp"
+              ReadOnlyVariables="User::CompleteFileName,$Package::PDataBaseName,$Package::PDestinationFolder,$Package::PErrorLogAbolutePath,$Package::PFileDelimiter,$Package::PServerName">
+              <ProjectItem
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_af5dca217bb04993bfbce1f4ca1540a9")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("UnitedHealth Group")]
+[assembly: AssemblyProduct("ST_af5dca217bb04993bfbce1f4ca1540a9")]
+[assembly: AssemblyCopyright("Copyright @ UnitedHealth Group 2021")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.resx"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptMain.cs"
+                Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.IO;
+using Renci.SshNet;
+using Renci.SshNet.Sftp;
+using System.Data.Odbc;
+#endregion
+
+namespace ST_af5dca217bb04993bfbce1f4ca1540a9
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+	{
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+
+		/// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+		public void Main()
+		{
+            // TODO: Add your code here
+
+            string ErrorLogAbolutePath = Dts.Variables["$Package::PErrorLogAbolutePath"].Value.ToString();
+            string DestinationFolder = Dts.Variables["$Package::PDestinationFolder"].Value.ToString();
+            string CompleteFileName = Dts.Variables["User::CompleteFileName"].Value.ToString();
+            string absolutePath = DestinationFolder + CompleteFileName;
+            string FileDelimiter = Dts.Variables["$Package::PFileDelimiter"].Value.ToString();
+            string ServerName = Dts.Variables["$Package::PServerName"].Value.ToString();
+            string DataBaseName = Dts.Variables["$Package::PDataBaseName"].Value.ToString();
+
+            string connetionString = "Data Source=" + ServerName + "; Initial Catalog=" + DataBaseName + ";Integrated Security=True";
+
+            //int RecordCount = 60;
+            try
+            {
+                // TODO: Add your code here
+                SqlConnection scn = new SqlConnection(connetionString);
+                scn.Open();
+                SqlCommand scmd = new SqlCommand("Select [DCN], [ICN],[Medical/Hospital],[Paper/Manual],[Cirrus Load Date] from [OLEDB Dest_SQL] order by id", scn);
+                DataTable dt = new DataTable();
+                dt.Load(scmd.ExecuteReader());
+                StreamWriter sw = null;
+                sw = new StreamWriter(absolutePath, false);
+
+                int ColumnCount = dt.Columns.Count;
+                int counter = 0, del_status = 0, cnt = 0, datarowcount = dt.Rows.Count;
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    cnt++;
+
+                    for (int i = 0; i < ColumnCount; i++)
+                    {
+                        if (!Convert.IsDBNull(dr[i]))
+                            sw.Write(dr[i].ToString());
+                        else
+                            sw.Write("Null");
+
+                        if (i < ColumnCount - 1)
+                            sw.Write(FileDelimiter);
+                    }
+                    if (del_status == 0)
+                    { del_status = 1; }
+                    else
+                    {
+                        if (cnt <= datarowcount - 1)
+                        {
+                            sw.Write(FileDelimiter);
+                        }
+                    }
+                    sw.Write(sw.NewLine);
+                    if (counter == 0)
+                    {
+                        for (int ic = 0; ic < ColumnCount; ic++)
+                        {
+                            sw.Write(dt.Columns[ic]);
+                            if (ic < ColumnCount - 1)
+                            {
+                                sw.Write(FileDelimiter);
+                            }
+                        }
+                        counter = 1;
+                        sw.Write(sw.NewLine);
+                    }
+                }
+                sw.Close();
+
+                SendFileToServer.Send(absolutePath);
+            }
+
+            catch (Exception e)
+            {
+                StreamWriter sw = new StreamWriter(ErrorLogAbolutePath);
+                sw.Write("Inner Exception Is :" + e.InnerException.ToString() + "\nError Message :" + e.Message.ToString() + "\nError Source :" + e.Source.ToString());
+                sw.Close();
+                Dts.TaskResult = (int)ScriptResults.Failure;
+            }
+            Dts.TaskResult = (int)ScriptResults.Success;
+        }
+        public static class SendFileToServer
+        {
+            // Enter your host name or IP here 
+            // private static string host = "10.175.253.141";
+            // Enter your sftp username here 
+            // private static string username = "is00bes";
+            // Enter your sftp password here 
+            // private static string password = "OV33mYwn";
+           public static void Send(string fileName)
+            {
+                Console.WriteLine("Create client Object");
+                SftpClient sftpClient = new SftpClient("10.175.253.141", 22, "is00bes", "OV33mYwn");
+                sftpClient.Connect();
+                sftpClient.ChangeDirectory("/cirrus/oxford_imaging");
+                using (FileStream fs = new FileStream(fileName, FileMode.Open))
+                    {
+                        sftpClient.BufferSize = 1024;
+                        sftpClient.UploadFile(fs, Path.GetFileName(fileName));
+                    fs.Close();
+                   }
+                    sftpClient.Dispose();
+             //return 0;
+
+            }
+        }
+        
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+	}
+}]]></ProjectItem>
+              <ProjectItem
+                Name="ST_af5dca217bb04993bfbce1f4ca1540a9.csproj"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9F399FDD-7294-4263-B618-3B2729F500AE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_af5dca217bb04993bfbce1f4ca1540a9</RootNamespace>
+    <AssemblyName>ST_af5dca217bb04993bfbce1f4ca1540a9</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Renci.SshNet">
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST130</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:CodeName>ST_af5dca217bb04993bfbce1f4ca1540a9</msb:CodeName>
+		<msb:Language>msBuild</msb:Language>
+		<msb:DisplayName>ST_af5dca217bb04993bfbce1f4ca1540a9</msb:DisplayName>
+		<msb:ProjectId>{82A36C09-B8C3-4335-B196-4B73790EE499}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ST_af5dca217bb04993bfbce1f4ca1540a9.csproj"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="ScriptMain.cs"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_af5dca217bb04993bfbce1f4ca1540a9.Properties.Settings.get_Default():ST_af5dca217bb04993bfbce1f4ca1540a9.Properties.Sett" +
+    "ings")]
+
+namespace ST_af5dca217bb04993bfbce1f4ca1540a9.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_af5dca217bb04993bfbce1f4ca1540a9.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_af5dca217bb04993bfbce1f4ca1540a9.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_af5dca217bb04993bfbce1f4ca1540a9.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_af5dca217bb04993bfbce1f4ca1540a9.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_af5dca217bb04993bfbce1f4ca1540a9.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <BinaryItem
+                Name="ST_af5dca217bb04993bfbce1f4ca1540a9.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAOLg9V8AAAAAAAAAAOAAIiALATAAABoAAAAIAAAAAAAAwjkA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAHA5AABPAAAAAEAAAMAEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAyBkAAAAgAAAAGgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAMAEAAAAQAAAAAYAAAAcAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAIgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAACk
+OQAAAAAAAEgAAAACAAUAfCQAADwUAAABAAAAAAAAALg4AAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAABswBQD7AgAAAQAAEQIoEAAACm8RAAAKcgEAAHBvEgAACm8T
+AAAKbxQAAAoKAigQAAAKbxEAAApyPwAAcG8SAAAKbxMAAApvFAAACgIoEAAACm8RAAAKcnkAAHBv
+EgAACm8TAAAKbxQAAAoLBygVAAAKDAIoEAAACm8RAAAKcqcAAHBvEgAACm8TAAAKbxQAAAoNAigQ
+AAAKbxEAAApy2QAAcG8SAAAKbxMAAApvFAAAChMEAigQAAAKbxEAAApyBQEAcG8SAAAKbxMAAApv
+FAAAChMFG40lAAABJRZyNQEAcKIlFxEEoiUYck8BAHCiJRkRBaIlGnJ1AQBwoigWAAAKEwYRBnMX
+AAAKEwcRB28YAAAKcqkBAHARB3MZAAAKEwhzGgAAChMJEQkRCG8bAAAKbxwAAAoUEwoIFnMdAAAK
+EwoRCW8eAAAKbx8AAAoTCxYTDBYTDRYTDhEJbyAAAApvHwAAChMPEQlvIAAACm8hAAAKExA42AAA
+ABEQbyIAAAp0FAAAARMREQ4XWBMOFhMSK0kRERESbyMAAAooJAAACi0XEQoRERESbyMAAApvFAAA
+Cm8lAAAKKwwRCnKAAgBwbyUAAAoREhELF1kvCBEKCW8lAAAKERIXWBMSERIRCzKxEQ0tBRcTDSsQ
+EQ4RDxdZMAgRCglvJQAAChEKJW8mAAAKbyUAAAoRDC1GFhMTKysRChEJbx4AAAoRE28nAAAKbygA
+AAoRExELF1kvCBEKCW8lAAAKERMXWBMTERMRCzLPFxMMEQolbyYAAApvJQAAChEQbykAAAo6HP//
+/94VERB1FQAAARMUERQsBxEUbyoAAArcEQpvKwAACggoCgAABt52ExUGcywAAAoTFhEWHI0lAAAB
+JRZyigIAcKIlFxEVby0AAApvFAAACqIlGHK0AgBwoiUZERVvLgAACm8UAAAKoiUactYCAHCiJRsR
+FW8vAAAKbxQAAAqiKBYAAApvJQAAChEWbysAAAoCKBAAAAoXbzAAAAreAAIoEAAAChZvMAAACioA
+QTQAAAIAAABpAQAA6wAAAFQCAAAVAAAAAAAAAAAAAAD3AAAAgQEAAHgCAAB2AAAAFgAAAR4CKDEA
+AAoqHgIoMgAACiqufgEAAAQtHnL2AgBw0AMAAAIoMwAACm80AAAKczUAAAqAAQAABH4BAAAEKhp+
+AgAABCoeAoACAAAEKhp+AwAABCoeAig2AAAKKi5zCAAABoADAAAEKgAAGzAEAGwAAAACAAARcmgD
+AHAoNwAACnKSAwBwHxZysAMAcHLAAwBwczgAAAoKBm85AAAKBnLSAwBwbzoAAAoCGXM7AAAKCwYg
+AAQAAG88AAAKBgcCKD0AAAoUbz4AAAoHbz8AAAreCgcsBgdvKgAACtwGb0AAAAoqARAAAAIAOgAh
+WwAKAAAAAEJTSkIBAAEAAAAAAAwAAAB2NC4wLjMwMzE5AAAAAAUAbAAAAIgFAAAjfgAA9AUAAOwH
+AAAjU3RyaW5ncwAAAADgDQAAAAQAACNVUwDgEQAAEAAAACNHVUlEAAAA8BEAAEwCAAAjQmxvYgAA
+AAAAAAACAAABVx2iAQkDAAAA+gEzABYAAAEAAAA3AAAABgAAAAYAAAAKAAAAAgAAAEAAAAACAAAA
+EAAAAAIAAAACAAAAAwAAAAQAAAABAAAABgAAAAEAAAACAAAAAABgBAEAAAAAAAYA/AInBgYAiwMn
+BgYASAIUBg8AmwYAAAYAdQICBQYA3wICBQYAwAICBQYAcgMCBQYAHAMCBQYANQMCBQYAjAICBQYA
+pwLIAwoAUAMPBAoAmAEPBA4ASAV/Bw4AggB/Bw4AwgBoAAYAxAU3AAYA7QX8Bg4AxwdoAAYA1QCl
+BAYAXwWlBAYAPQelBBIAlQdMBwYAkQQ3AAYArASlBAYAKwIUBgYAtAVHBgYAfAXtBBYA9QFKBBYA
+XAJKBBYAzwHYBAYAEAInBgoAOAQPBBoA3QYtARoAzAAtAQYA5AOlBA4AOwVpBQ4AlAV/Bw4AiAVo
+AA4AFAVoAA4AtAFoAA4AKQVoAAYAtgelBAYA0QU3AA4AzQRoAAYAYwGlBAYA4QClBAYA0wcCBQYA
+EAGlBBIAdAdMBwYArQA3AAYA6wM3AAYAlQQ3AAYAAQClBAAAAAAuAAAAAAABAAEAAQAQAMIECgA5
+AAEAAQAAABAATgaqBl0AAQADAAABEADnBqoGgQADAAcAggEQANwFAABdAAQACgADAQAAHwcAAGkA
+BAALABEAsQQjAREAiAEnAREAkgArAQYGYAAvAVaADwcyAVaAaAEyAVAgAAAAAIYAyAQGAAEAjCMA
+AAAAhhgHBgYAAQCUIwAAAACDGAcGBgABAJwjAAAAAJMIsAU2AQEAyCMAAAAAkwhwATsBAQDPIwAA
+AACTCHwBQAEBANcjAAAAAJYIWQdGAQIA3iMAAAAAhhgHBgYAAgDmIwAAAACRGA0GSwECAPQjAAAA
+AJYAjQDRAAIAAAABALMDAAABACQBCQAHBgEAEQAHBgYAGQAHBgoAKQAHBhAAMQAHBhAAOQAHBhAA
+QQAHBhAASQAHBhAAUQAHBhAAWQAHBhAAYQAHBhAAaQAHBgYA2QAHBgYA+QAHBhUACQEHBgYAcQAX
+Bz4AEQHZBkQAGQGcBEoAIQGpA1EAuQDiA1UAKQE2B1kAKQE2B18AeQAHBhAAMQG9BAYAgQAHBmUA
+iQAHBgYAgQCiBWwAiQB9AHIAkQAHBnkAiQDwBn8AUQGsB4UAiQAtB4kAUQH5BY8AmQCgB1EAoQCc
+BJQAYQGIBJkAaQEKAhAAaQFXAVUASQGcBJ4AaQEKAqUAmQC+B6oAqQDtAQYAaQHnAQYAkQAHBhAA
+sQBWBa4AsQC2AFUAsQCiAFUAEQFlBwEAcQAHBgYAuQAHBgYAeQHzALMAeQHPB7wA4QAHBsIAAQEH
+BgYAkQFNAdEAwQAHBtYAmQFEBwYAwQDcBxAAyQAHBt4AwQC5A+YAqQEYAesAwQAFAfAAsQHnAQYA
+mQHtAQYACAAUABkBCAAYAB4BKQBzAIYBLgALAF4BLgATAGcBLgAbAIYBLgAjAI8BLgArALgBLgAz
+ALgBLgA7AL4BLgBDAI8BLgBLANYBLgBTALgBLgBbAP8BQwBjAB4BSQBzAIYBYQB7AB4BYwBrAB4B
+GwDKAAMAAQAEAAMAAAC0BU8BAACQAVQBAABdB1kBAgAEAAMAAgAFAAUAAQAGAAUAAgAHAAcABIAA
+AAEAAAD8HYFHAAAAAAAACgAAAAQAAAAAAAAAAAAAAP4AdAAAAAAADQAAAAAAAAAAAAAABwHwAwAA
+AAAEAAAAAAAAAAAAAAD+AGgAAAAAAOAHAAAAAAAAAAAAABABTAcAAAAABAAAAAAAAAAAAAAA/gCl
+BAAAAAANAAAAAAAAAAAAAAAHAUEAAAAAAAAAAAABAAAAWAYAAAUAAgAGAAIAAAAAAABBY3Rpb25g
+MQBTVF9hZjVkY2EyMTdiYjA0OTkzYmZiY2UxZjRjYTE1NDBhOQA8TW9kdWxlPgBTeXN0ZW0uSU8A
+TWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAHZhbHVlX18AU3lzdGVtLkRhdGEAbXNjb3Js
+aWIATG9hZABTcWxDb21tYW5kAFNlbmQAZGVmYXVsdEluc3RhbmNlAGdldF9Tb3VyY2UARmlsZU1v
+ZGUAZ2V0X01lc3NhZ2UARGF0YVRhYmxlAFZhcmlhYmxlAElEaXNwb3NhYmxlAFJ1bnRpbWVUeXBl
+SGFuZGxlAEdldFR5cGVGcm9tSGFuZGxlAFVwbG9hZEZpbGUAQ29uc29sZQBHZXRGaWxlTmFtZQBm
+aWxlTmFtZQBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5SdW50aW1lAFdyaXRlTGluZQBnZXRfTmV3
+TGluZQBUeXBlAEZhaWx1cmUAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAcmVzb3VyY2VDdWx0dXJl
+AFZTVEFSVFNjcmlwdE9iamVjdE1vZGVsQmFzZQBJbnRlcm5hbERhdGFDb2xsZWN0aW9uQmFzZQBB
+cHBsaWNhdGlvblNldHRpbmdzQmFzZQBDbG9zZQBEaXNwb3NlAEVkaXRvckJyb3dzYWJsZVN0YXRl
+AFdyaXRlAENvbXBpbGVyR2VuZXJhdGVkQXR0cmlidXRlAERlYnVnZ2VyTm9uVXNlckNvZGVBdHRy
+aWJ1dGUARGVidWdnYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVBdHRyaWJ1dGUAQXNzZW1i
+bHlUaXRsZUF0dHJpYnV0ZQBBc3NlbWJseVRyYWRlbWFya0F0dHJpYnV0ZQBUYXJnZXRGcmFtZXdv
+cmtBdHRyaWJ1dGUAQXNzZW1ibHlDb25maWd1cmF0aW9uQXR0cmlidXRlAEFzc2VtYmx5RGVzY3Jp
+cHRpb25BdHRyaWJ1dGUAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBBc3NlbWJseVBy
+b2R1Y3RBdHRyaWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAU1NJU1NjcmlwdFRhc2tF
+bnRyeVBvaW50QXR0cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBSdW50aW1lQ29tcGF0
+aWJpbGl0eUF0dHJpYnV0ZQBnZXRfVmFsdWUAdmFsdWUAc2V0X0J1ZmZlclNpemUAU3lzdGVtLlJ1
+bnRpbWUuVmVyc2lvbmluZwBUb1N0cmluZwBQYXRoAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuU2NyaXB0
+VGFzawBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5UYXNrcy5TY3JpcHRUYXNrAFNjcmlwdE9iamVj
+dE1vZGVsAFN5c3RlbS5Db21wb25lbnRNb2RlbABTVF9hZjVkY2EyMTdiYjA0OTkzYmZiY2UxZjRj
+YTE1NDBhOS5kbGwASXNEQk51bGwARmlsZVN0cmVhbQBnZXRfSXRlbQBTeXN0ZW0ARW51bQByZXNv
+dXJjZU1hbgBPcGVuAFNjcmlwdE1haW4ARGF0YUNvbHVtbgBTeXN0ZW0uQ29uZmlndXJhdGlvbgBT
+eXN0ZW0uR2xvYmFsaXphdGlvbgBTeXN0ZW0uUmVmbGVjdGlvbgBEYXRhQ29sdW1uQ29sbGVjdGlv
+bgBEYXRhUm93Q29sbGVjdGlvbgBEYkNvbm5lY3Rpb24AU3FsQ29ubmVjdGlvbgBnZXRfSW5uZXJF
+eGNlcHRpb24AU3lzdGVtLkRhdGEuQ29tbW9uAEN1bHR1cmVJbmZvAElEYXRhUmVhZGVyAFNxbERh
+dGFSZWFkZXIARXhlY3V0ZVJlYWRlcgBnZXRfUmVzb3VyY2VNYW5hZ2VyAFN0cmVhbVdyaXRlcgBU
+ZXh0V3JpdGVyAFNlbmRGaWxlVG9TZXJ2ZXIASUVudW1lcmF0b3IAR2V0RW51bWVyYXRvcgAuY3Rv
+cgAuY2N0b3IAU3lzdGVtLkRpYWdub3N0aWNzAFN5c3RlbS5SdW50aW1lLkNvbXBpbGVyU2Vydmlj
+ZXMAU3lzdGVtLlJlc291cmNlcwBTVF9hZjVkY2EyMTdiYjA0OTkzYmZiY2UxZjRjYTE1NDBhOS5Q
+cm9wZXJ0aWVzLlJlc291cmNlcy5yZXNvdXJjZXMARGVidWdnaW5nTW9kZXMAU1RfYWY1ZGNhMjE3
+YmIwNDk5M2JmYmNlMWY0Y2ExNTQwYTkuUHJvcGVydGllcwBnZXRfVmFyaWFibGVzAFNldHRpbmdz
+AGdldF9Db2x1bW5zAFN5c3RlbS5Db2xsZWN0aW9ucwBTdWNjZXNzAGdldF9EdHMAU2NyaXB0UmVz
+dWx0cwBnZXRfUm93cwBDb25jYXQAT2JqZWN0AENvbm5lY3QAUmVuY2kuU3NoTmV0AGdldF9EZWZh
+dWx0AHNldF9UYXNrUmVzdWx0AEJhc2VDbGllbnQAU3lzdGVtLkRhdGEuU3FsQ2xpZW50AFNmdHBD
+bGllbnQAZ2V0X0N1cnJlbnQAZ2V0X0NvdW50AENvbnZlcnQATW92ZU5leHQARGF0YVJvdwBnZXRf
+QXNzZW1ibHkAQ2hhbmdlRGlyZWN0b3J5AAA9JABQAGEAYwBrAGEAZwBlADoAOgBQAEUAcgByAG8A
+cgBMAG8AZwBBAGIAbwBsAHUAdABlAFAAYQB0AGgAADkkAFAAYQBjAGsAYQBnAGUAOgA6AFAARABl
+AHMAdABpAG4AYQB0AGkAbwBuAEYAbwBsAGQAZQByAAAtVQBzAGUAcgA6ADoAQwBvAG0AcABsAGUA
+dABlAEYAaQBsAGUATgBhAG0AZQAAMSQAUABhAGMAawBhAGcAZQA6ADoAUABGAGkAbABlAEQAZQBs
+AGkAbQBpAHQAZQByAAArJABQAGEAYwBrAGEAZwBlADoAOgBQAFMAZQByAHYAZQByAE4AYQBtAGUA
+AC8kAFAAYQBjAGsAYQBnAGUAOgA6AFAARABhAHQAYQBCAGEAcwBlAE4AYQBtAGUAABlEAGEAdABh
+ACAAUwBvAHUAcgBjAGUAPQAAJTsAIABJAG4AaQB0AGkAYQBsACAAQwBhAHQAYQBsAG8AZwA9AAAz
+OwBJAG4AdABlAGcAcgBhAHQAZQBkACAAUwBlAGMAdQByAGkAdAB5AD0AVAByAHUAZQAAgNVTAGUA
+bABlAGMAdAAgAFsARABDAE4AXQAsACAAWwBJAEMATgBdACwAWwBNAGUAZABpAGMAYQBsAC8ASABv
+AHMAcABpAHQAYQBsAF0ALABbAFAAYQBwAGUAcgAvAE0AYQBuAHUAYQBsAF0ALABbAEMAaQByAHIA
+dQBzACAATABvAGEAZAAgAEQAYQB0AGUAXQAgAGYAcgBvAG0AIABbAE8ATABFAEQAQgAgAEQAZQBz
+AHQAXwBTAFEATABdACAAbwByAGQAZQByACAAYgB5ACAAaQBkAAAJTgB1AGwAbAAAKUkAbgBuAGUA
+cgAgAEUAeABjAGUAcAB0AGkAbwBuACAASQBzACAAOgAAIQoARQByAHIAbwByACAATQBlAHMAcwBh
+AGcAZQAgADoAAB8KAEUAcgByAG8AcgAgAFMAbwB1AHIAYwBlACAAOgAAcVMAVABfAGEAZgA1AGQA
+YwBhADIAMQA3AGIAYgAwADQAOQA5ADMAYgBmAGIAYwBlADEAZgA0AGMAYQAxADUANAAwAGEAOQAu
+AFAAcgBvAHAAZQByAHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAAKUMAcgBlAGEAdABlACAA
+YwBsAGkAZQBuAHQAIABPAGIAagBlAGMAdAAAHTEAMAAuADEANwA1AC4AMgA1ADMALgAxADQAMQAA
+D2kAcwAwADAAYgBlAHMAABFPAFYAMwAzAG0AWQB3AG4AAC0vAGMAaQByAHIAdQBzAC8AbwB4AGYA
+bwByAGQAXwBpAG0AYQBnAGkAbgBnAAD1zkWc3SLeQp4TIUsOjhvJAAQgAQEIAyAAAQUgAQEREQQg
+AQEOBSABARF5IgcXDg4ODg4ODhI9EkESRRJJCAgICAgSTRJRCAgSVRJZEkkFIAASgIkFIAASgI0G
+IAESgJEcAyAAHAMgAA4FAAIODg4FAAEOHQ4GIAIBDhI9BSAAEoCdBiABARKAoQUgAgEOAgUgABKA
+pQMgAAgFIAASgK0EIAASTQQgARwIBAABAhwGIAESgLkIBCABARwDIAACBCAAElkIAAESgL0RgMEF
+IAASgMUHIAIBDhKAxQYHAhJhEmUEAAEBDgcgBAEOCA4OByACAQ4RgNEEIAEBCQQAAQ4ODSADARKA
+2Q4VEoDdAQsIt3pcVhk04IkIiYRdzYCAzJEIHO6fi949sQYEAAAAAAQBAAAAAwYScQMGEnUDBhIQ
+AgYIAwYRGAQAABJxBAAAEnUFAAEBEnUEAAASEAMAAAEECAAScQQIABJ1BAgAEhAIAQAIAAAAAAAe
+AQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBCAEAAgAAAAAAKAEAI1NUX2FmNWRjYTIxN2Ji
+MDQ5OTNiZmJjZTFmNGNhMTU0MGE5AAAFAQAAAAAXAQASVW5pdGVkSGVhbHRoIEdyb3VwAAAoAQAj
+Q29weXJpZ2h0IEAgVW5pdGVkSGVhbHRoIEdyb3VwIDIwMjEAAEkBABouTkVURnJhbWV3b3JrLFZl
+cnNpb249djQuNQEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUSLk5FVCBGcmFtZXdvcmsgNC41AAAA
+tAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVhZGVyLCBtc2Nvcmxp
+YiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1
+YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAA
+AABQQURQQURQtAAAAJg5AAAAAAAAAAAAALI5AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkOQAA
+AAAAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AQAQAAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAA
+AFhAAABiBAAAAAAAAAAAAABiBDQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAA
+vQTv/gAAAQAAAAEAgUf8HQAAAQCBR/wdPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAAB
+AFYAYQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAA
+AAAAALAEwgMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAngMAAAEAMAAwADAAMAAw
+ADQAYgAwAAAAGgABAAEAQwBvAG0AbQBlAG4AdABzAAAAAAAAAEYAEwABAEMAbwBtAHAAYQBuAHkA
+TgBhAG0AZQAAAAAAVQBuAGkAdABlAGQASABlAGEAbAB0AGgAIABHAHIAbwB1AHAAAAAAAHAAJAAB
+AEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAABTAFQAXwBhAGYANQBkAGMAYQAyADEA
+NwBiAGIAMAA0ADkAOQAzAGIAZgBiAGMAZQAxAGYANABjAGEAMQA1ADQAMABhADkAAAA+AA8AAQBG
+AGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4ANwA2ADcANgAuADEAOAAzADAANQAAAAAA
+cAAoAAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABTAFQAXwBhAGYANQBkAGMAYQAyADEANwBi
+AGIAMAA0ADkAOQAzAGIAZgBiAGMAZQAxAGYANABjAGEAMQA1ADQAMABhADkALgBkAGwAbAAAAGwA
+JAABAEwAZQBnAGEAbABDAG8AcAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkAcgBpAGcAaAB0ACAAQAAg
+AFUAbgBpAHQAZQBkAEgAZQBhAGwAdABoACAARwByAG8AdQBwACAAMgAwADIAMQAAACoAAQABAEwA
+ZQBnAGEAbABUAHIAYQBkAGUAbQBhAHIAawBzAAAAAAAAAAAAeAAoAAEATwByAGkAZwBpAG4AYQBs
+AEYAaQBsAGUAbgBhAG0AZQAAAFMAVABfAGEAZgA1AGQAYwBhADIAMQA3AGIAYgAwADQAOQA5ADMA
+YgBmAGIAYwBlADEAZgA0AGMAYQAxADUANAAwAGEAOQAuAGQAbABsAAAAaAAkAAEAUAByAG8AZAB1
+AGMAdABOAGEAbQBlAAAAAABTAFQAXwBhAGYANQBkAGMAYQAyADEANwBiAGIAMAA0ADkAOQAzAGIA
+ZgBiAGMAZQAxAGYANABjAGEAMQA1ADQAMABhADkAAABCAA8AAQBQAHIAbwBkAHUAYwB0AFYAZQBy
+AHMAaQBvAG4AAAAxAC4AMAAuADcANgA3ADYALgAxADgAMwAwADUAAAAAAEYADwABAEEAcwBzAGUA
+bQBiAGwAeQAgAFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADcANgA3ADYALgAxADgAMwAwADUAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAMAAAAxDkAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{17A9AAD7-0F8A-4C6C-BFE6-200BBAF8F658}"
+          DTS:From="Package\Sequence Container\ESQL_TableCreateFirstRecordInsert"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Data Flow Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{C8F9C3DA-7797-4370-A69C-8D7BD0E8438A}"
+          DTS:From="Package\Sequence Container\Data Flow Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence Container\ESQL_InsertLastRecord" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{3A19CF0E-0BC1-470E-9319-3E7799196B2C}"
+          DTS:From="Package\Sequence Container\ESQL_InsertLastRecord"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sequence Container\Scrpt_SQL_To_CSV1" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{88D81813-8C38-4867-B756-A8DAFDAC7DD1}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Send Mail Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{431E9F53-7FAE-46D6-BC94-305D428EE5C7}"
+      DTS:EventID="16"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{E70F215C-F7BF-4C5B-81E2-003F258F8C28}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{08EC5EE1-F683-4219-96A0-360EA59ADBED}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="Connection">@[$Package::PServerName]+"."+ @[$Package::PDataBaseName]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D98FC179-3D80-4198-A17D-82393FEEDC17}"
+              SQLTask:SqlStatementSource="If OBJECT_ID('[SSIS_ERROR_LOG]')is not NULL Drop Table [SSIS_ERROR_LOG]&#xA;&#xA; CREATE TABLE [SSIS_ERROR_LOG] (&#xA;  EXECUTION_ID varchar(max),&#xA;      SOURCE_NAME varchar(max),&#xA;     MESSAGE varchar(max),&#xA;      MESSAGE_CODE varchar(max),&#xA;      LOG_DTM datetime&#xA;   )&#xA;&#xA;INSERT INTO dbo.SSIS_ERROR_LOG&#xA;                      (EXECUTION_ID,SOURCE_NAME, MESSAGE, MESSAGE_CODE, LOG_DTM)&#xA;VALUES     (?,?,?,?, GETDATE())" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::SourceName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="System::ErrorDescription"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="System::ErrorCode"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Send Mail Task"
+          DTS:CreationName="Microsoft.SendMailTask"
+          DTS:Description="Send Mail Task"
+          DTS:DTSID="{61CA5B6E-C4CC-41E8-93B6-0CBB51F5F198}"
+          DTS:ExecutableType="Microsoft.SendMailTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Send Mail Task"
+          DTS:TaskContact="Send Mail Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="FromLine">@[$Package::EmailFrom]</DTS:PropertyExpression>
+          <DTS:PropertyExpression
+            DTS:Name="MessageSource">"Hi Team
+The Package "+@[System::PackageName] +" has failed with below information :- 
+Error Code : " + (DT_WSTR, 50) @[System::ErrorCode]+". 
+Error Description : "+ @[System::ErrorDescription]+". 
+Error Source : "+ @[System::SourceName]+".
+Please contact Polaris Team.
+
+Thanks &amp; Regards
+Polaris Team"</DTS:PropertyExpression>
+          <DTS:PropertyExpression
+            DTS:Name="Subject">@[System::PackageName]+ " Package Failed."</DTS:PropertyExpression>
+          <DTS:PropertyExpression
+            DTS:Name="ToLine">@[$Package::EmailTo]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SendMailTask:SendMailTaskData
+              SendMailTask:SMTPServer="{B17596EC-73ED-42B5-94B9-3B46CADB3564}"
+              SendMailTask:From="jainendra_k_sharma@optum.com"
+              SendMailTask:To="jainendra_k_sharma@optum.com"
+              SendMailTask:Subject="Member_IMGACCReport Package Failed."
+              SendMailTask:MessageSource="Hi Team&#xA;The Package Member_IMGACCReport has failed with below information :- &#xA;Error Code : 0. &#xA;Error Description : . &#xA;Error Source : .&#xA;Please contact Polaris Team.&#xA;&#xA;Thanks &amp; Regards&#xA;Polaris Team" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Send Mail Task"
+          TopLeft="256.666666666667,508.333333333333" />
+        <NodeLayout
+          Size="150.666666666667,42"
+          Id="Package\Sequence Container\Data Flow Task"
+          TopLeft="38,97" />
+        <NodeLayout
+          Size="189.333333333334,42"
+          Id="Package\Sequence Container\ESQL_InsertLastRecord"
+          TopLeft="28.5,213" />
+        <NodeLayout
+          Size="246.666666666667,42"
+          Id="Package\Sequence Container\ESQL_TableCreateFirstRecordInsert"
+          TopLeft="5.5,16" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Sequence Container\Scrpt_SQL_To_CSV1"
+          TopLeft="37.5,312" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="129,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-15.5,39"
+              Start="0,0"
+              End="-15.5,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5"
+                    Point2="0,19.5"
+                    Point3="-4,19.5" />
+                  <mssgle:LineSegment
+                    End="-11.5,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-11.5,19.5"
+                    Point2="-15.5,19.5"
+                    Point3="-15.5,23.5" />
+                  <mssgle:LineSegment
+                    End="-15.5,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="113.5,139">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9.5,74"
+              Start="0,0"
+              End="9.5,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33"
+                    Point2="0,37"
+                    Point3="4,37" />
+                  <mssgle:LineSegment
+                    End="5.5,37" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.5,37"
+                    Point2="9.5,37"
+                    Point3="9.5,41" />
+                  <mssgle:LineSegment
+                    End="9.5,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="124.25,255">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57"
+              Start="0,0"
+              End="0,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="509.333333333334,409.333333333334"
+          Size="509.333333333334,452"
+          Id="Package\Sequence Container"
+          TopLeft="231,0" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="485.5,452">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-153.833333333333,56.333333333333"
+              Start="0,0"
+              End="-153.833333333333,48.833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.1666666666665" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.1666666666665"
+                    Point2="0,28.1666666666665"
+                    Point3="-4,28.1666666666665" />
+                  <mssgle:LineSegment
+                    End="-149.833333333333,28.1666666666665" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-149.833333333333,28.1666666666665"
+                    Point2="-153.833333333333,28.1666666666665"
+                    Point3="-153.833333333333,32.1666666666665" />
+                  <mssgle:LineSegment
+                    End="-153.833333333333,48.833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="164,42.6666666666667"
+          Id="Package.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package.EventHandlers[OnError]\Send Mail Task"
+          TopLeft="12.9166664741933,63.6999988609552" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Sequence Container\Data Flow Task\ODBC Source"
+          TopLeft="44.5,5.5" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Sequence Container\Data Flow Task\Derived Column"
+          TopLeft="37.5,77.5" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Data Flow Task.Paths[ODBC Source Output]"
+          TopLeft="115,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Sequence Container\Data Flow Task\OLE DB Destination"
+          TopLeft="17.7222222222222,161.055555555556" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="114.5,119.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11.2777777777778,41.5555555555556"
+              Start="0,0"
+              End="-11.2777777777778,34.0555555555556">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.7777777777778" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.7777777777778"
+                    Point2="0,20.7777777777778"
+                    Point3="-4,20.7777777777778" />
+                  <mssgle:LineSegment
+                    End="-7.27777777777777,20.7777777777778" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.27777777777777,20.7777777777778"
+                    Point2="-11.2777777777778,20.7777777777778"
+                    Point3="-11.2777777777778,24.7777777777778" />
+                  <mssgle:LineSegment
+                    End="-11.2777777777778,34.0555555555556" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Data Flow Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

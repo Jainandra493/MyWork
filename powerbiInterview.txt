@@ -1,0 +1,17 @@
+PowerBIPractice
+Q1. Power Query vs power pivot ? how to use them, its purpose and everything.
+Q2. Different type of filters.
+Q3. Calculate and calculatable function
+Q4. Calander date function
+Q5. Row level security
+Q6. Circular dependency
+Q7. Import for less data to hold datavs direct Query for huge date it hold only the schema
+Q8. composite in Powerbi for Performance tunning of direct query
+Q9. Data Modelling (Star is best for performance tunning and it work faster and Snowflake Schema)
+Q10. Drill down and Drill Through
+Q11. How to navigate from one page to another and from one dasboard to another.
+Q12. Merge, append Query.
+Q13. Chart Date is not correct, how you will correct them. For this you will sort them. How to sort.
+Q14. How to Publish. using Gateway.
+Q15. Can We edit report in Dashboard, yes we can add new visual onto dashboard.
+Q16. Calculate column and Calculate measure. 
